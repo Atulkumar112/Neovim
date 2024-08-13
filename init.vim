@@ -78,22 +78,22 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-]> :LspDefinition<CR>
 
 " Important!!
-if has('termguicolors')
-        set termguicolors
-endif
+        if has('termguicolors')
+          set termguicolors
+        endif
 
-" For dark version.
-set background=dark
+        " For dark version.
+        set background=dark
 
-" For light version.
+        " For light version.
 "        set background=light
 
-" Set contrast.
-" This configuration option should be placed before `colorscheme everforest`.
-" Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'soft'
+        " Set contrast.
+        " This configuration option should be placed before `colorscheme everforest`.
+        " Available values: 'hard', 'medium'(default), 'soft'
+        let g:everforest_background = 'soft'
 
-" For better performance
-let g:everforest_better_performance = 1
+        " For better performance
+        let g:everforest_better_performance = 1
 
-colorscheme everforest
+        colorscheme everforest
