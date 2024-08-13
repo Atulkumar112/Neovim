@@ -1,0 +1,9 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["go"],
+  "go.formatTool": "goimports",
+  "go.lintTool": "golangci-lint",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "tsserver.trace": "verbose",
+  "typescript.enable": true,
+  "javascript.enable": true
+}
