@@ -1,5 +1,4 @@
 " neovim config from builtin.com
-
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
@@ -47,6 +46,8 @@ Plug 'honza/vim-snippets'      "A collection of snippets
 Plug 'scrooloose/nerdtree'     " file explorer for neovim. Netrw comes as default for neovim.
 Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
 Plug 'mhinz/vim-startify'   "A really handy start page with lots of customizations.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 "let g:NERDTreeDirArrowExpandable="+"
@@ -65,6 +66,8 @@ command T tabn
 
 " command -nargs=1 TN call MyTabN(args)
 
+let mapleader=" "
+
 inoremap " ""<left>
 inoremap ' ''<left>
 inoremap ( ()<left>
@@ -76,24 +79,48 @@ nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-]> :LspDefinition<CR>
+nnoremap <C-space> :terminal<CR>
+nnoremap j gj
+nnoremap vv v$h
+nnoremap Y <esc>v$y 
+nnoremap <leader><leader> <esc>:nohlsearch<CR>
 
-" Important!!
-        if has('termguicolors')
-          set termguicolors
-        endif
+" Window
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
-        " For dark version.
-        set background=dark
+" keep the copied text in the register while pasting
+xnoremap <leader>p "_dP
 
-        " For light version.
-"        set background=light
+" copy file path
+nnoremap <leader>f :let @+=expand("%")<cr>
 
-        " Set contrast.
-        " This configuration option should be placed before `colorscheme everforest`.
-        " Available values: 'hard', 'medium'(default), 'soft'
-        let g:everforest_background = 'soft'
+" fuzzy finder (junegunn/fzf.vim)
+nnoremap <leader>o :Files<cr>
+nnoremap <leader>g :GitFiles!<cr>
+nnoremap <leader><tab> :Buffers!<cr>
+nnoremap <leader>t :BTags!<cr>
+nnoremap <leader>r :Rg!<cr>
 
-        " For better performance
-        let g:everforest_better_performance = 1
+" Vim theme 
+if has('termguicolors')
+  set termguicolors
+endif
 
-        colorscheme everforest
+" For dark version.
+set background=dark
+
+" For light version.
+"set background=light
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'soft'
+
+" For better performance
+let g:everforest_better_performance = 1
+
+colorscheme everforest
