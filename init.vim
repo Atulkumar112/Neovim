@@ -23,20 +23,31 @@ set ttyfast                 " Speed up scrolling in Vim
 
 set number
 set clipboard=unnamed
+set hlsearch
+set incsearch
+set showmatch
+set smartcase
+set ignorecase
 
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers and Coc: A fast code completion engine.
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
 Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
-" Plug 'vim-airline/vim-airline' "very impressive extesion which is use for color of my below border when i changes my modes
+"Plug 'vim-airline/vim-airline' "very impressive extesion which is use for color of my below border when i changes my modes
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
-"Plug 'DaikyXendo/nvim-material-icon'
 Plug 'f-person/git-blame.nvim'
-Plug 'sainnhe/vim-color-forest-night'
-"Plug 'kyazdani42/nvim-web-devicons'
- 
+Plug 'itchyny/vim-highlighturl'
+Plug 'tomasiser/vim-code-dark'
+Plug 'pangloss/vim-javascript'
+Plug 'isobit/vim-caddyfile'
+Plug 'dense-analysis/ale'
+Plug 'rhysd/vim-lsp-ale'
+Plug 'jiz4oh/vim-lspfuzzy'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 
 " plugin section from builtin.com 
 Plug 'dracula/vim'                     "Coc: A fast code completion engine
@@ -48,6 +59,9 @@ Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
 Plug 'mhinz/vim-startify'   "A really handy start page with lots of customizations.
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 "let g:NERDTreeDirArrowExpandable="+"
@@ -59,22 +73,8 @@ let NERDTreeShowHidden=1
 command E Explore
 command T tabn
 
-" Functions for my shortcuts cmd who takes args
-" function! MyTabN(n)
-" execute "tabn " . a:n
-" endfunction
-
-" command -nargs=1 TN call MyTabN(args)
-
 let mapleader=" "
 
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -104,23 +104,27 @@ nnoremap <leader><tab> :Buffers!<cr>
 nnoremap <leader>t :BTags!<cr>
 nnoremap <leader>r :Rg!<cr>
 
-" Vim theme 
-if has('termguicolors')
-  set termguicolors
-endif
+" split virtically
+nnoremap <leader>v :vsplit<Space>
 
-" For dark version.
-set background=dark
+colorscheme codedark
 
-" For light version.
-"set background=light
+" ale (dense-analysis/ale)
+let g:ale_virtualtext_cursor = 0
+let g:ale_detail_to_floating_preview = 1
+let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
+let g:ale_fixers =
+      \ {'javascript': ['eslint', 'prettier']
+      \ , 'typescript': ['eslint', 'prettier']
+      \ , 'go': ['gofumpt', 'goimports']
+      \ , 'html': ['eslint', 'prettier']
+      \ , 'vue': ['eslint', 'prettier']
+      \ , 'python': ['black']}
 
-" Set contrast.
-" This configuration option should be placed before `colorscheme everforest`.
-" Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'soft'
+" lsp-settings
+let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
 
-" For better performance
-let g:everforest_better_performance = 1
-
-colorscheme everforest
+" MarkdownPreview
+nmap <C-s> <Plug>MarkdownPreview
+nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle
