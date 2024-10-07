@@ -30,7 +30,6 @@ set smartcase
 set ignorecase
 
 call plug#begin('~/.config/nvim/plugged')
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers and Coc: A fast code completion engine.
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
 Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
@@ -52,7 +51,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " plugin section from builtin.com 
 Plug 'dracula/vim'                     "Coc: A fast code completion engine
 Plug 'ryanoasis/vim-devicons'   "Devicon support for nerdtree.
-Plug 'SirVer/ultisnips'        "A Snippets engine.
+"Plug 'SirVer/ultisnips'        "A Snippets engine.
 Plug 'honza/vim-snippets'      "A collection of snippets
 Plug 'scrooloose/nerdtree'     " file explorer for neovim. Netrw comes as default for neovim.
 Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
@@ -62,12 +61,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugin' }
+Plug 'nvim-lua/plenary.nvim' 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'christoomey/vim-system-copy'
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 call plug#end()
 
 "let g:NERDTreeDirArrowExpandable="+"
 "let g:NERDTreeDirArrowCollapsible="~"
 let NERDTreeShowHidden=1
-
 
 " My shortcuts
 command E Explore
@@ -99,9 +102,9 @@ nnoremap <leader>f :let @+=expand("%")<cr>
 
 " fuzzy finder (junegunn/fzf.vim)
 nnoremap <leader>o :Files<cr>
-nnoremap <leader>g :GitFiles!<cr>
-nnoremap <leader><tab> :Buffers!<cr>
-nnoremap <leader>t :BTags!<cr>
+nnoremap <leader>g :GitFiles<cr>
+nnoremap <leader><tab> :Buffers<cr>
+nnoremap <leader>t :BTags<cr>
 nnoremap <leader>r :Rg!<cr>
 
 " split virtically
@@ -124,7 +127,13 @@ let g:ale_fixers =
 " lsp-settings
 let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
 
+"format code
+nnoremap <leader>i gg=G
+
 " MarkdownPreview
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
+
+"enabling osc52
+let g:system_copy_enable_osc52 = 1
