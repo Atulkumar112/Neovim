@@ -5,5 +5,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "tsserver.trace": "verbose",
   "typescript.enable": true,
-  "javascript.enable": true
+  "javascript.enable": true,
+  "typescript.autoImportSuggestions.enabled": true,
+  "tsserver.experimental.autoImportFile": true,
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

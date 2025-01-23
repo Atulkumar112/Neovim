@@ -20,7 +20,10 @@ set clipboard=unnamedplus   " using system clipboard
 filetype plugin on
 set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
+set colorcolumn=82
+set background=dark
 
+" searching
 set number
 set clipboard=unnamed
 set hlsearch
@@ -28,6 +31,23 @@ set incsearch
 set showmatch
 set smartcase
 set ignorecase
+
+" general
+set hidden
+set nobackup
+set noswapfile
+set nowritebackup
+
+set nowrap
+set scrolloff=10
+set sidescroll=10
+
+"Theme
+autocmd vimenter * ++nested colorscheme gruvbox
+let g:gruvbox_italic=1
+let g:gruvbox_undercurl = 0
+let g:gruvbox_contrast_dark = 'hard'
+highlight link FloatBorder NormalFloat
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers and Coc: A fast code completion engine.
@@ -38,7 +58,7 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'f-person/git-blame.nvim'
 Plug 'itchyny/vim-highlighturl'
-Plug 'tomasiser/vim-code-dark'
+"Plug 'tomasiser/vim-code-dark'    "vs code theme
 Plug 'pangloss/vim-javascript'
 Plug 'isobit/vim-caddyfile'
 Plug 'dense-analysis/ale'
@@ -64,8 +84,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugin' }
 Plug 'nvim-lua/plenary.nvim' 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'christoomey/vim-system-copy'
-Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+Plug 'morhetz/gruvbox'  "for theme
+
 call plug#end()
 
 "let g:NERDTreeDirArrowExpandable="+"
@@ -110,19 +130,19 @@ nnoremap <leader>r :Rg!<cr>
 " split virtically
 nnoremap <leader>v :vsplit<Space>
 
-colorscheme codedark
+"colorscheme codedark
 
 " ale (dense-analysis/ale)
 let g:ale_virtualtext_cursor = 0
 let g:ale_detail_to_floating_preview = 1
 let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
 let g:ale_fixers =
-      \ {'javascript': ['eslint', 'prettier']
-      \ , 'typescript': ['eslint', 'prettier']
-      \ , 'go': ['gofumpt', 'goimports']
-      \ , 'html': ['eslint', 'prettier']
-      \ , 'vue': ['eslint', 'prettier']
-      \ , 'python': ['black']}
+            \ {'javascript': ['eslint', 'prettier']
+            \ , 'typescript': ['eslint', 'prettier']
+            \ , 'go': ['gofumpt', 'goimports']
+            \ , 'html': ['eslint', 'prettier']
+            \ , 'vue': ['eslint', 'prettier']
+            \ , 'python': ['black']}
 
 " lsp-settings
 let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
@@ -133,7 +153,10 @@ nnoremap <leader>i gg=G
 " MarkdownPreview
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
+nmap <C-P> <Plug>MarkdownPreviewToggle
 
-"enabling osc52
-let g:system_copy_enable_osc52 = 1
+"for copy and paste outside the vim
+vnoremap <C-c> "+y
+nnoremap <C-p> "+p
+
+
