@@ -42,6 +42,10 @@ set nowrap
 set scrolloff=10
 set sidescroll=10
 
+"auto save
+let g:auto_save = 1
+let g:auto_save_message = "Auto-saving..."
+
 "Theme
 autocmd vimenter * ++nested colorscheme gruvbox
 let g:gruvbox_italic=1
@@ -85,6 +89,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugin' }
 Plug 'nvim-lua/plenary.nvim' 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'morhetz/gruvbox'  "for theme
+Plug 'Pocco81/auto-save.nvim'
 
 call plug#end()
 
@@ -154,9 +159,8 @@ nnoremap <leader>i gg=G
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-P> <Plug>MarkdownPreviewToggle
-
 "for copy and paste outside the vim
-vnoremap <C-c> "+y
-nnoremap <C-p> "+p
-
-
+vnoremap y "+y
+vnoremap p "+p
+vnoremap d "+d
+nnoremap p "+p
