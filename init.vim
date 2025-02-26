@@ -1,4 +1,14 @@
-" neovim config from builtin.com
+"     _       _ __        _
+"    (_)___  (_) /__   __(_)___ ___
+"   / / __ \/ / __/ | / / / __ `__ \
+"  / / / / / / /__| |/ / / / / / / /
+" /_/_/ /_/_/\__(_)___/_/_/ /_/ /_/
+"
+" external
+source ~/.config/nvim/keys.vim    " keybindings
+"source ~/.config/nvim/utils.vim   " utility functions
+source ~/.config/nvim/plugin.vim  " plugin configurations
+
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
@@ -53,114 +63,132 @@ let g:gruvbox_undercurl = 0
 let g:gruvbox_contrast_dark = 'hard'
 highlight link FloatBorder NormalFloat
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'} "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers and Coc: A fast code completion engine.
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
-Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
-"Plug 'vim-airline/vim-airline' "very impressive extesion which is use for color of my below border when i changes my modes
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'f-person/git-blame.nvim'
-Plug 'itchyny/vim-highlighturl'
-"Plug 'tomasiser/vim-code-dark'    "vs code theme
-Plug 'pangloss/vim-javascript'
-Plug 'isobit/vim-caddyfile'
-Plug 'dense-analysis/ale'
-Plug 'rhysd/vim-lsp-ale'
-Plug 'jiz4oh/vim-lspfuzzy'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"call plug#begin('~/.config/nvim/plugged')
+"Plug 'neoclide/coc.nvim', {'branch': 'release'} "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers and Coc: A fast code completion engine.
+"Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
+"Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
+""Plug 'vim-airline/vim-airline' "very impressive extesion which is use for color of my below border when i changes my modes
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'mattn/vim-lsp-settings'
+"Plug 'f-person/git-blame.nvim'
+"Plug 'itchyny/vim-highlighturl'
+""Plug 'tomasiser/vim-code-dark'    "vs code theme
+"Plug 'pangloss/vim-javascript'
+"Plug 'isobit/vim-caddyfile'
+"Plug 'dense-analysis/ale'
+"Plug 'rhysd/vim-lsp-ale'
+"Plug 'jiz4oh/vim-lspfuzzy'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 
-" plugin section from builtin.com 
-Plug 'dracula/vim'                     "Coc: A fast code completion engine
-Plug 'ryanoasis/vim-devicons'   "Devicon support for nerdtree.
-"Plug 'SirVer/ultisnips'        "A Snippets engine.
-Plug 'honza/vim-snippets'      "A collection of snippets
-Plug 'scrooloose/nerdtree'     " file explorer for neovim. Netrw comes as default for neovim.
-Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
-Plug 'mhinz/vim-startify'   "A really handy start page with lots of customizations.
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugin' }
-Plug 'nvim-lua/plenary.nvim' 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'morhetz/gruvbox'  "for theme
-Plug 'Pocco81/auto-save.nvim'
+"" plugin section from builtin.com 
+"Plug 'dracula/vim'                     "Coc: A fast code completion engine
+"Plug 'ryanoasis/vim-devicons'   "Devicon support for nerdtree.
+""Plug 'SirVer/ultisnips'        "A Snippets engine.
+"Plug 'honza/vim-snippets'      "A collection of snippets
+"Plug 'scrooloose/nerdtree'     " file explorer for neovim. Netrw comes as default for neovim.
+"Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
+"Plug 'mhinz/vim-startify'   "A really handy start page with lots of customizations.
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+"Plug 'jiangmiao/auto-pairs'
+"Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugin' }
+"Plug 'nvim-lua/plenary.nvim' 
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'morhetz/gruvbox'  "for theme
+"Plug 'Pocco81/auto-save.nvim'
 
-call plug#end()
+"call plug#end()
 
 "let g:NERDTreeDirArrowExpandable="+"
 "let g:NERDTreeDirArrowCollapsible="~"
 let NERDTreeShowHidden=1
 
-" My shortcuts
-command E Explore
-command T tabn
+"" My shortcuts
+"command E Explore
+"command T tabn
 
-let mapleader=" "
+"let mapleader=" "
 
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-]> :LspDefinition<CR>
-nnoremap <C-space> :terminal<CR>
-nnoremap j gj
-nnoremap vv v$h
-nnoremap Y <esc>v$y 
-nnoremap <leader><leader> <esc>:nohlsearch<CR>
+"nnoremap <C-f> :NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTree<CR>
+"nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <C-]> :LspDefinition<CR>
+"nnoremap <C-space> :terminal<CR>
+"nnoremap j gj
+"nnoremap vv v$h
+"nnoremap Y <esc>v$y 
+"nnoremap <leader><leader> <esc>:nohlsearch<CR>
 
-" Window
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
+"" Window
+"nnoremap <c-h> <c-w>h
+"nnoremap <c-j> <c-w>j
+"nnoremap <c-k> <c-w>k
+"nnoremap <c-l> <c-w>l
 
-" keep the copied text in the register while pasting
-xnoremap <leader>p "_dP
+"" keep the copied text in the register while pasting
+"xnoremap <leader>p "_dP
 
-" copy file path
-nnoremap <leader>f :let @+=expand("%")<cr>
+"" copy file path
+"nnoremap <leader>f :let @+=expand("%")<cr>
 
-" fuzzy finder (junegunn/fzf.vim)
-nnoremap <leader>o :Files<cr>
-nnoremap <leader>g :GitFiles<cr>
-nnoremap <leader><tab> :Buffers<cr>
-nnoremap <leader>t :BTags<cr>
-nnoremap <leader>r :Rg!<cr>
+"" fuzzy finder (junegunn/fzf.vim)
+"nnoremap <leader>o :Files<cr>
+"nnoremap <leader>g :GitFiles<cr>
+"nnoremap <leader><tab> :Buffers<cr>
+"nnoremap <leader>t :BTags<cr>
+"nnoremap <leader>r :Rg!<cr>
 
-" split virtically
-nnoremap <leader>v :vsplit<Space>
+"" split virtically
+"nnoremap <leader>v :vsplit<Space>
 
 "colorscheme codedark
 
 " ale (dense-analysis/ale)
-let g:ale_virtualtext_cursor = 0
-let g:ale_detail_to_floating_preview = 1
-let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
-let g:ale_fixers =
-            \ {'javascript': ['eslint', 'prettier']
-            \ , 'typescript': ['eslint', 'prettier']
-            \ , 'go': ['gofumpt', 'goimports']
-            \ , 'html': ['eslint', 'prettier']
-            \ , 'vue': ['eslint', 'prettier']
-            \ , 'python': ['black']}
+"let g:ale_virtualtext_cursor = 0
+"let g:ale_detail_to_floating_preview = 1
+"let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
+"let g:ale_fixers =
+            "\ {'javascript': ['eslint', 'prettier']
+            "\ , 'typescript': ['eslint', 'prettier']
+            "\ , 'go': ['gofumpt', 'goimports']
+            "\ , 'html': ['eslint', 'prettier']
+            "\ , 'vue': ['eslint', 'prettier']
+            "\ , 'python': ['black']}
 
-" lsp-settings
-let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
+"" LSP configuration for Go
+"augroup LspGo
+  "au!
+  "autocmd User lsp_setup call lsp#register_server({
+      "\ 'name': 'gopls',
+      "\ 'cmd': {server_info->['gopls']},
+      "\ 'whitelist': ['go'],
+      "\ })
+  "autocmd FileType go setlocal omnifunc=lsp#complete
+"augroup END
 
-"format code
-nnoremap <leader>i gg=G
+"let g:lsp_log_file = '/tmp/lsp.log'
 
-" MarkdownPreview
-nmap <C-s> <Plug>MarkdownPreview
-nmap <M-s> <Plug>MarkdownPreviewStop
-nmap <C-P> <Plug>MarkdownPreviewToggle
-"for copy and paste outside the vim
-vnoremap y "+y
-vnoremap p "+p
-vnoremap d "+d
-nnoremap p "+p
+"nnoremap <silent> K :call lsp#hover()<CR>
+"nnoremap <silent> gd :call lsp#definition()<CR>
+"nnoremap <silent> gi :call lsp#implementation()<CR>
+
+"" lsp-settings
+"let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
+
+""format code
+"nnoremap <leader>i gg=G
+
+"" MarkdownPreview
+"nmap <C-s> <Plug>MarkdownPreview
+"nmap <M-s> <Plug>MarkdownPreviewStop
+"nmap <C-P> <Plug>MarkdownPreviewToggle
+
+""for copy and paste outside the vim
+"vnoremap y "+y
+"vnoremap p "+p
+"vnoremap d "+d
+"::qnnoremap p "+p
