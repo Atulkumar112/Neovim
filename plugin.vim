@@ -7,6 +7,7 @@
 "
 "              PLUGIN CONFIGURATIONS
 "               powered by vim-plug
+"
 call plug#begin('~/.config/nvim/plugged')
    Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
    Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
@@ -37,7 +38,6 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'jiangmiao/auto-pairs'
    Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-   Plug 'nvim-telescope/telescope.nvim', { 'do': ':UpdateRemotePlugin' }
    Plug 'nvim-lua/plenary.nvim' 
    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
    Plug 'morhetz/gruvbox'  "for theme
@@ -82,6 +82,7 @@ call plug#end()
 " this for quick-scope
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 " Trigger a highlight only when pressing f and F.
 let g:qs_highlight_on_keys = ['f', 'F']
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
@@ -92,10 +93,30 @@ augroup qs_colors
  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 
- "emmet (mattn/emmet-vim)
+"emmet (mattn/emmet-vim)
 let g:user_emmet_leader_key=','
 
-" vim-lsp
+"-------------------- vim-lsp ---------------
+"for python
+if executable('pylsp')
+    " pip install python-lsp-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['pylsp']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+"for golang 
+if executable('gopls')
+    " Install gopls: go install golang.org/x/tools/gopls@latest
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'allowlist': ['go'],
+        \ })
+endif
+
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_fold_enabled = 0
@@ -106,15 +127,18 @@ function! s:on_lsp_buffer_enabled() abort
 
     nmap <buffer> <leader>rn <plug>(lsp-rename)
     nmap <buffer> K <plug>(lsp-hover)
-    nmap <buffer> ca :FzfLspCodeAction!<cr>
-    nmap <buffer> gt :FzfLspTypeDefinition!<cr>
-    nmap <buffer> gi :FzfLspImplementation!<cr>
-    nmap <buffer> gr :FzfLspReferences!<cr>
-    nmap <buffer> gd :FzfLspDefinition!<cr>
-    nmap <buffer> gs :FzfLspDocumentSymbol!<cr>
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
 
     let g:lsp_format_sync_timeout = 1000
-    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
 endfunction
 
 augroup lsp_install
@@ -123,7 +147,7 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-let g:asyncomplete_auto_popup = 0
+"let g:asyncomplete_auto_popup = 0
 
 "function! s:check_back_space() abort
    ""let col = col('.') - 1
@@ -138,6 +162,7 @@ let g:asyncomplete_auto_popup = 0
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ale (dense-analysis/ale)
+let g:ale_fix_on_save = 1
 let g:ale_virtualtext_cursor = 0
 let g:ale_detail_to_floating_preview = 1
 let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
@@ -149,16 +174,6 @@ let g:ale_fixers =
            \ , 'vue': ['eslint', 'prettier']
            \ , 'python': ['black']}
 
-" LSP configuration for Go
-augroup LspGo
- au!
- autocmd User lsp_setup call lsp#register_server({
-     \ 'name': 'gopls',
-     \ 'cmd': {server_info->['gopls']},
-     \ 'whitelist': ['go'],
-     \ })
- autocmd FileType go setlocal omnifunc=lsp#complete
-augroup END
 let g:lsp_log_file = '/tmp/lsp.log'
 
 " lsp-settings
