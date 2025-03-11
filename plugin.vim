@@ -96,6 +96,10 @@ augroup END
 "emmet (mattn/emmet-vim)
 let g:user_emmet_leader_key=','
 
+"-------------------- gitgutter ---------------
+"set priority as 0
+let g:gitgutter_sign_priority = 0
+
 "-------------------- vim-lsp ---------------
 "for python
 if executable('pylsp')
@@ -162,7 +166,7 @@ augroup END
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ale (dense-analysis/ale)
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_virtualtext_cursor = 0
 let g:ale_detail_to_floating_preview = 1
 let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']

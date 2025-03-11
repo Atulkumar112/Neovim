@@ -60,3 +60,6 @@ vnoremap y "+y
 vnoremap p "+p
 vnoremap d "+d
 nnoremap p "+p
+
+" mics
+nmap re :source $MYVIMRC<CR>
