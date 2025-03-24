@@ -60,7 +60,7 @@ call wilder#setup({'modes': [':', '/', '?']})
 "\   'colorscheme': 'gruvbox',
 "\   'active': {
 "\       'left': [['mode', 'paste'],
-"\                ['gitbranch', 'readonly', 'filepath', 'modefied']],
+"\                ['gitbranch', 'readonly', 'filepath', 'modified']],
 "\   },
 "\   'tabline': {
 "\       'left': [['buffers']],
