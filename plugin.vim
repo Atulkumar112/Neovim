@@ -27,8 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'isobit/vim-caddyfile'
 
 
-   Plug 'dracula/vim'                     "Coc: A fast code completion engine
-   Plug 'ryanoasis/vim-devicons'   "Devicon support for nerdtree.
+   Plug 'ryanoasis/vim-devicons'
    Plug 'honza/vim-snippets'      "A collection of snippets
    Plug 'preservim/nerdtree' " file explorer for neovim. Netrw comes as default for neovim.
    Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
@@ -47,7 +46,12 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'unblevable/quick-scope'
    Plug 'AndrewRadev/splitjoin.vim'
    Plug 'rmagatti/auto-session'
+   Plug 'gelguy/wilder.nvim'
 call plug#end()
+
+
+" Default keys for wilder
+call wilder#setup({'modes': [':', '/', '?']})
 
 "this is getting error fix this
 "" statusline (itchyny/lightline.vim, mengelbrecht/lightline-bufferline)
@@ -56,7 +60,7 @@ call plug#end()
 "\   'colorscheme': 'gruvbox',
 "\   'active': {
 "\       'left': [['mode', 'paste'],
-"\                ['gitbranch', 'readonly', 'filepath', 'modified']],
+"\                ['gitbranch', 'readonly', 'filepath', 'modefied']],
 "\   },
 "\   'tabline': {
 "\       'left': [['buffers']],
