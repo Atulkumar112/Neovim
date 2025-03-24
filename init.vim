@@ -32,6 +32,7 @@ set cursorline              " highlight current cursorline
 set ttyfast                 " Speed up scrolling in Vim
 set colorcolumn=82
 set background=dark
+set encoding=UTF-8
 
 " searching
 set number

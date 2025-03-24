@@ -62,4 +62,4 @@ vnoremap d "+d
 nnoremap p "+p
 
 " mics
-nmap re :source $MYVIMRC<CR>
+nmap Re :source $MYVIMRC<CR>
