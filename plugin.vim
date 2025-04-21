@@ -10,7 +10,6 @@
 "
 call plug#begin('~/.config/nvim/plugged')
    Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
-   Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
 
    Plug 'mattn/emmet-vim'
    Plug 'prabirshrestha/vim-lsp'
@@ -21,7 +20,10 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'prabirshrestha/asyncomplete.vim'
    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+   Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
    Plug 'f-person/git-blame.nvim'
+   Plug 'tpope/vim-fugitive'
+
    Plug 'itchyny/vim-highlighturl'
    Plug 'pangloss/vim-javascript'
    Plug 'isobit/vim-caddyfile'
@@ -35,7 +37,7 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
    Plug 'jiangmiao/auto-pairs'
-   Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+   "Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
    Plug 'nvim-lua/plenary.nvim' 
    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -171,9 +173,12 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ale (dense-analysis/ale)
 let g:ale_fix_on_save = 0
-let g:ale_virtualtext_cursor = 0
+let g:ale_virtualtext_cursor = 1
 let g:ale_detail_to_floating_preview = 1
 let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
+let g:ale_virtualtext_prefix = '✗ '  " Prefix for errors
+let g:ale_virtualtext_highlight = 'Error'  " Highlight group for virtual text
+let g:ale_set_highlights = 1
 let g:ale_fixers =
            \ {'javascript': ['eslint', 'prettier']
            \ , 'typescript': ['eslint', 'prettier']

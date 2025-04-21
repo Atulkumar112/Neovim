@@ -46,6 +46,8 @@ nnoremap <leader>r :Rg!<cr>
 " split virtically
 nnoremap <leader>v :vsplit<Space>
 
+" split horizontally
+nnoremap <leader>h :split<Space>
 
 "format code
 nnoremap <leader>i gg=G
