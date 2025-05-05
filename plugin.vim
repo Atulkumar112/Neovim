@@ -37,7 +37,7 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
    Plug 'jiangmiao/auto-pairs'
-   "Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+   Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
    Plug 'nvim-lua/plenary.nvim' 
    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -49,6 +49,7 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'AndrewRadev/splitjoin.vim'
    Plug 'rmagatti/auto-session'
    Plug 'gelguy/wilder.nvim'
+   Plug 'akinsho/git-conflict.nvim', {'tag': '*'}
 call plug#end()
 
 
