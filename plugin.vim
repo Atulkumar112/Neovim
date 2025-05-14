@@ -28,10 +28,14 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'pangloss/vim-javascript'
    Plug 'isobit/vim-caddyfile'
 
-
+   " nerdtree buddies
+   Plug 'preservim/nerdtree'
+   Plug 'Xuyuanp/nerdtree-git-plugin'
    Plug 'ryanoasis/vim-devicons'
+   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+   Plug 'PhilRunninger/nerdtree-visual-selection'
+
    Plug 'honza/vim-snippets'      "A collection of snippets
-   Plug 'preservim/nerdtree' " file explorer for neovim. Netrw comes as default for neovim.
    Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
    Plug 'mhinz/vim-startify'   "A really handy start page with lots of customizations.
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -196,3 +200,17 @@ let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
 " auto-session
 lua require('auto-session').setup {}
 
+
+" git conflict configuration
+lua << EOF
+require('git-conflict').setup({
+  default_mappings = true, -- Enable default buffer local mappings created by this plugin
+  default_commands = true, -- Enable commands created by this plugin
+  disable_diagnostics = false, -- This will keep diagnostics enabled in a conflicted buffer
+  list_opener = 'copen', -- Command or function to open the conflicts list
+  highlights = { -- They must have background color, otherwise the default color will be used
+    incoming = 'DiffAdd',
+    current = 'DiffText',
+  }
+})
+EOF
