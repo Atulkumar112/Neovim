@@ -14,4 +14,5 @@ I am using Neovim with vim-plug, along with vim-lsp and related plugins.
 #### for removed thoese plugins who are not in used
 ```
 :PlugClean
+
 ```
