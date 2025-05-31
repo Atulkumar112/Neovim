@@ -35,7 +35,6 @@ set background=dark
 set encoding=UTF-8
 
 " searching
-set number
 set clipboard=unnamed
 set hlsearch
 set incsearch
@@ -49,9 +48,13 @@ set nobackup
 set noswapfile
 set nowritebackup
 
-set nowrap
 set scrolloff=10
 set sidescroll=10
+
+set textwidth=0
+set wrapmargin=0
+set wrap
+set linebreak
 
 "auto save
 let g:auto_save = 1
