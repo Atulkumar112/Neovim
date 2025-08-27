@@ -65,3 +65,6 @@ nnoremap p "+p
 
 " mics
 nmap Re :source $MYVIMRC<CR>
+
+" json formatter
+nnoremap <C-j>:!python -m json.tool<CR>

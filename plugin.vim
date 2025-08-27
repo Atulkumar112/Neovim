@@ -11,7 +11,6 @@
 call plug#begin('~/.config/nvim/plugged')
    Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
 
-   Plug 'mattn/emmet-vim'
    Plug 'prabirshrestha/vim-lsp'
    Plug 'mattn/vim-lsp-settings'
    Plug 'dense-analysis/ale'
@@ -20,19 +19,21 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'prabirshrestha/asyncomplete.vim'
    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+   Plug 'mattn/emmet-vim' " for html
+
    Plug 'airblade/vim-gitgutter' "help for show the changes in git branch in file
    Plug 'f-person/git-blame.nvim'
    Plug 'tpope/vim-fugitive'
+   Plug 'akinsho/git-conflict.nvim', {'tag': '*'}
 
    Plug 'itchyny/vim-highlighturl'
-   Plug 'pangloss/vim-javascript'
+   "Plug 'pangloss/vim-javascript'
    Plug 'isobit/vim-caddyfile'
 
    " nerdtree buddies
    Plug 'preservim/nerdtree'
    Plug 'Xuyuanp/nerdtree-git-plugin'
    Plug 'ryanoasis/vim-devicons'
-   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
    Plug 'PhilRunninger/nerdtree-visual-selection'
 
    Plug 'honza/vim-snippets'      "A collection of snippets
@@ -41,7 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
    Plug 'jiangmiao/auto-pairs'
-   Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+   Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
    Plug 'nvim-lua/plenary.nvim' 
    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -53,7 +54,6 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'AndrewRadev/splitjoin.vim'
    Plug 'rmagatti/auto-session'
    Plug 'gelguy/wilder.nvim'
-   Plug 'akinsho/git-conflict.nvim', {'tag': '*'}
 call plug#end()
 
 
@@ -113,14 +113,14 @@ let g:gitgutter_sign_priority = 0
 
 "-------------------- vim-lsp ---------------
 "for python
-if executable('pylsp')
-    " pip install python-lsp-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->['pylsp']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+"if executable('pyright')
+    "" pip install pyright 
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'pyright',
+        "\ 'cmd': {server_info->['pyright']},
+        "\ 'allowlist': ['python'],
+        "\ })
+"endif
 
 "for golang 
 if executable('gopls')

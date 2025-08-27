@@ -25,6 +25,8 @@ set wildmode=longest,list   " get bash-like tab completions
 " set cc=80                  " set an 80 column border for good coding style
 filetype plugin indent on   "allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
+
+set lazyredraw
 set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 filetype plugin on
@@ -56,6 +58,8 @@ set wrapmargin=0
 set wrap
 set linebreak
 
+set regexpengine=2
+
 "auto save
 let g:auto_save = 1
 let g:auto_save_message = "Auto-saving..."
@@ -68,4 +72,4 @@ let g:gruvbox_contrast_dark = 'hard'
 highlight link FloatBorder NormalFloat
 
 let NERDTreeShowHidden=1
-
+let g:NERDTreeMinimalUI = 1
