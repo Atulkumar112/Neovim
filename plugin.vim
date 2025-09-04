@@ -9,14 +9,10 @@
 "               powered by vim-plug
 "
 call plug#begin('~/.config/nvim/plugged')
-   Plug 'prettier/vim-prettier', { 'do': 'npm install' }   "just format the code
 
    Plug 'prabirshrestha/vim-lsp'
-   Plug 'mattn/vim-lsp-settings'
-   Plug 'dense-analysis/ale'
-   Plug 'rhysd/vim-lsp-ale'
-   Plug 'jiz4oh/vim-lspfuzzy'
    Plug 'prabirshrestha/asyncomplete.vim'
+   Plug 'mattn/vim-lsp-settings'
    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
    Plug 'mattn/emmet-vim' " for html
@@ -27,7 +23,6 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'akinsho/git-conflict.nvim', {'tag': '*'}
 
    Plug 'itchyny/vim-highlighturl'
-   "Plug 'pangloss/vim-javascript'
    Plug 'isobit/vim-caddyfile'
 
    " nerdtree buddies
@@ -35,6 +30,14 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'Xuyuanp/nerdtree-git-plugin'
    Plug 'ryanoasis/vim-devicons'
    Plug 'PhilRunninger/nerdtree-visual-selection'
+   " below shortcuts are for above plugin 
+   " NERDTreeMapActivateNode o	Open selected files.
+   " NERDTreeMapOpenSplit	 i	Open selected files in horizontal splits.
+   " NERDTreeMapOpenVSplit	 s	Open selected files in vertical splits.
+   " NERDTreeMapOpenInTab	 t	Open selected files in tabs.
+   " implement below shortcuts 
+   " gt → go to next tab            :tabn → go to next tab
+   " gT → go to previous tab        :tabn → go to next tab
 
    Plug 'honza/vim-snippets'      "A collection of snippets
    Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
@@ -44,16 +47,13 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'jiangmiao/auto-pairs'
    Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-   Plug 'nvim-lua/plenary.nvim' 
-   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
    Plug 'morhetz/gruvbox'  "for theme
    Plug 'Pocco81/auto-save.nvim'
    Plug 'itchyny/lightline.vim'
    Plug 'mengelbrecht/lightline-bufferline'
    Plug 'unblevable/quick-scope'
-   Plug 'AndrewRadev/splitjoin.vim'
    Plug 'rmagatti/auto-session'
-   Plug 'gelguy/wilder.nvim'
+   Plug 'gelguy/wilder.nvim'  " down menu popup autocomplet suggestion
 call plug#end()
 
 
@@ -133,8 +133,8 @@ if executable('gopls')
 endif
 
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_document_highlight_enabled = 0
 let g:lsp_fold_enabled = 0
+
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
@@ -154,7 +154,22 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
 
     let g:lsp_format_sync_timeout = 1000
+
+    " 🔥 Diagnostic colors
+    highlight LspErrorText guifg=#ff5f5f ctermfg=Red
+    highlight LspWarningText guifg=#ffaf00 ctermfg=Yellow
+    highlight LspInformationText guifg=#5fd7ff ctermfg=Cyan
+    highlight LspHintText guifg=#5fff5f ctermfg=Green
+
+    " Optional: for virtual text
+    highlight LspErrorVirtualText guifg=#ff5f5f ctermfg=Red
+    highlight LspWarningVirtualText guifg=#ffaf00 ctermfg=Yellow
+    highlight LspInformationVirtualText guifg=#5fd7ff ctermfg=Cyan
+    highlight LspHintVirtualText guifg=#5fff5f ctermfg=Green
+
 endfunction
+
+highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
 
 augroup lsp_install
     au!
@@ -162,44 +177,16 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-"let g:asyncomplete_auto_popup = 0
-
-"function! s:check_back_space() abort
-   ""let col = col('.') - 1
-   ""return !col || getline('.')[col - 1]  =~ '\s'
-"endfunction
-"inoremap <silent><expr> <TAB>
- ""\ pumvisible() ? "\<C-n>" :
- ""\ <SID>check_back_space() ? "\<TAB>" :
- ""\ asyncomplete#force_refresh()
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" ale (dense-analysis/ale)
-let g:ale_fix_on_save = 0
-let g:ale_virtualtext_cursor = 1
-let g:ale_detail_to_floating_preview = 1
-let g:ale_floating_window_border = [' ', ' ', ' ', ' ', ' ', ' ']
-let g:ale_virtualtext_prefix = '✗ '  " Prefix for errors
-let g:ale_virtualtext_highlight = 'Error'  " Highlight group for virtual text
-let g:ale_set_highlights = 1
-let g:ale_fixers =
-           \ {'javascript': ['eslint', 'prettier']
-           \ , 'typescript': ['eslint', 'prettier']
-           \ , 'go': ['gofumpt', 'goimports']
-           \ , 'html': ['eslint', 'prettier']
-           \ , 'vue': ['eslint', 'prettier']
-           \ , 'python': ['black']}
 
 let g:lsp_log_file = '/tmp/lsp.log'
 
 " lsp-settings
-let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
+let g:lsp_settings_filasyncomplete_auto_popupetype_vue = ['typescript-language-server', 'volar-server']
 
 " auto-session
 lua require('auto-session').setup {}
-
 
 " git conflict configuration
 lua << EOF
