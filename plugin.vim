@@ -40,7 +40,6 @@ call plug#begin('~/.config/nvim/plugged')
    " gT → go to previous tab        :tabn → go to next tab
 
    Plug 'honza/vim-snippets'      "A collection of snippets
-   Plug 'preservim/nerdcommenter'  "An easy way for commenting outlines
    Plug 'mhinz/vim-startify'   "A really handy start page with lots of customizations.
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
@@ -56,8 +55,7 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'gelguy/wilder.nvim'  " down menu popup autocomplet suggestion
 call plug#end()
 
-
-" Default keys for wilder
+"Default keys for wilder
 call wilder#setup({'modes': [':', '/', '?']})
 
 "this is getting error fix this
