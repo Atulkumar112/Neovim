@@ -21,6 +21,13 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'f-person/git-blame.nvim'
    Plug 'tpope/vim-fugitive'
    Plug 'akinsho/git-conflict.nvim', {'tag': '*'}
+   " commands
+   " co — choose ours
+   " ct — choose theirs
+   " cb — choose both
+   " c0 — choose none
+   " ]x — move to previous conflict
+   " [x — move to next conflict
 
    Plug 'itchyny/vim-highlighturl'
    Plug 'isobit/vim-caddyfile'
@@ -50,9 +57,10 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'Pocco81/auto-save.nvim'
    Plug 'itchyny/lightline.vim'
    Plug 'mengelbrecht/lightline-bufferline'
-   Plug 'unblevable/quick-scope'
+   Plug 'unblevable/quick-scope'  "for move left and right in line quickly
    Plug 'rmagatti/auto-session'
    Plug 'gelguy/wilder.nvim'  " down menu popup autocomplet suggestion
+   Plug 'mason-org/mason.nvim'
 call plug#end()
 
 "Default keys for wilder
@@ -127,6 +135,15 @@ if executable('gopls')
         \ 'name': 'gopls',
         \ 'cmd': {server_info->['gopls']},
         \ 'allowlist': ['go'],
+        \ })
+endif
+
+" TypeScript / JavaScript LSP
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->['typescript-language-server', '--stdio']},
+        \ 'allowlist': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
         \ })
 endif
 
