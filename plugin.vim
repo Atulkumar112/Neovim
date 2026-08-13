@@ -61,12 +61,19 @@ call plug#begin('~/.config/nvim/plugged')
    Plug 'rmagatti/auto-session'
    Plug 'gelguy/wilder.nvim'  " down menu popup autocomplet suggestion
    Plug 'mason-org/mason.nvim'
+
+   Plug 'puremourning/vimspector'
+
 call plug#end()
+
+let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_diagnostics_float_cursor = 1
 
 "Default keys for wilder
 call wilder#setup({'modes': [':', '/', '?']})
 
-"this is getting error fix this
+"this is for lightline (upper tab like vscode i don't want this that's why it
+"is commented)
 "" statusline (itchyny/lightline.vim, mengelbrecht/lightline-bufferline)
 "set showtabline=2
 "let g:lightline = {

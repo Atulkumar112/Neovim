@@ -41,7 +41,7 @@ nnoremap <leader>o :Files<cr>
 nnoremap <leader>g :GitFiles<cr>
 nnoremap <leader><tab> :Buffers<cr>
 nnoremap <leader>t :BTags<cr>
-nnoremap <leader>r :Rg!<cr>
+nnoremap <leader>r :Rg<cr>
 
 " split virtically
 nnoremap <leader>v :vsplit<Space>
@@ -97,3 +97,11 @@ nnoremap <C-j>:!python -m json.tool<CR>
 "   gU5j : Change 5 lines below to upper case
 
 "   gu3k : Change 3 lines above to lower case
+"
+
+" For error pop up
+nnoremap <silent> <leader>e :call lsp#ui#vim#diagnostics#show_hover()<CR>
+
+set updatetime=500
+
+autocmd CursorHold * silent! call lsp#ui#vim#diagnostics#show_hover()
